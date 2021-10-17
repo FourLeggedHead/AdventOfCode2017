@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 01 - InverseCaptcha.Main", "Day01_InverseCaptcha\InverseCaptcha.Main\Day 01 - InverseCaptcha.Main.csproj", "{A0461965-0372-43A8-84A0-AB40F00B0ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 02 - ChecksumCalculator", "ChecksumCalculator\Day 02 - ChecksumCalculator.csproj", "{E4A0005D-4E3A-4C52-B996-AFE1D9EDA022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 03 - SpiralMemory.Main", "SpiralMemory.Main\Day 03 - SpiralMemory.Main.csproj", "{7BAB7A20-52B5-4348-B9C7-5312ED9DA057}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 05 - MazeOfTwistyTrampolines", "Day05_MazeOfTwistyTrampolines\Day 05 - MazeOfTwistyTrampolines.csproj", "{EB3B4152-B7E2-4780-ADDC-4C1711D2567B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 04 - High-Entropy Passphrases", "Day 4 - High-Entropy Passphrases\Day 04 - High-Entropy Passphrases.csproj", "{C3C91913-7103-4BE8-8D85-D873F008734A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 06 - MemoryReallocation", "Day06_MemoryReallocation\Day 06 - MemoryReallocation.csproj", "{F50785CD-D4F7-4C21-BD41-600665888040}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0461965-0372-43A8-84A0-AB40F00B0ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0461965-0372-43A8-84A0-AB40F00B0ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0461965-0372-43A8-84A0-AB40F00B0ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0461965-0372-43A8-84A0-AB40F00B0ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4A0005D-4E3A-4C52-B996-AFE1D9EDA022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4A0005D-4E3A-4C52-B996-AFE1D9EDA022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4A0005D-4E3A-4C52-B996-AFE1D9EDA022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4A0005D-4E3A-4C52-B996-AFE1D9EDA022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BAB7A20-52B5-4348-B9C7-5312ED9DA057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BAB7A20-52B5-4348-B9C7-5312ED9DA057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BAB7A20-52B5-4348-B9C7-5312ED9DA057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BAB7A20-52B5-4348-B9C7-5312ED9DA057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB3B4152-B7E2-4780-ADDC-4C1711D2567B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3B4152-B7E2-4780-ADDC-4C1711D2567B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3B4152-B7E2-4780-ADDC-4C1711D2567B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3B4152-B7E2-4780-ADDC-4C1711D2567B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C91913-7103-4BE8-8D85-D873F008734A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C91913-7103-4BE8-8D85-D873F008734A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C91913-7103-4BE8-8D85-D873F008734A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C91913-7103-4BE8-8D85-D873F008734A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F50785CD-D4F7-4C21-BD41-600665888040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F50785CD-D4F7-4C21-BD41-600665888040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F50785CD-D4F7-4C21-BD41-600665888040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F50785CD-D4F7-4C21-BD41-600665888040}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1A38F64-A803-4D83-AFDA-6C15BDBBB3CA}
+	EndGlobalSection
+EndGlobal
