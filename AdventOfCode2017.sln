@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 06 - MemoryReallocation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 07 - RecursiveCircus", "Day 07 - RecursiveCircus\Day 07 - RecursiveCircus.csproj", "{4E985DEA-00DA-4A19-B793-C70F7D654AE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day08_Registers", "Day 08 - Registers\Day08_Registers.csproj", "{B1961B28-068F-4685-9ED3-FB08DBAC4517}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 08 - Registers", "Day 08 - Registers\Day 08 - Registers.csproj", "{B1961B28-068F-4685-9ED3-FB08DBAC4517}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

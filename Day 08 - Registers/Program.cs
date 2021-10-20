@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MoreLinq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Day08_Registers
@@ -11,117 +13,44 @@ namespace Day08_Registers
     {
         static void Main(string[] args)
         {
-            var streamReader = new StreamReader(@"Resources\Input.txt");
-            var instruction = streamReader.ReadLine();
+            const string REGISTER_PATTERN =
+                @"(?<Register>[a-z]+) (?<Change>inc|dec) (?<Value>-?\d+) if (?<ConditionRegister>[a-z]+) (?<ConditionEvaluator>==|!=|<|<=|>|>=) (?<ConditionValue>-?\d+)";
 
-            var registersList = new List<Register>();
+            var instructions = File.ReadAllLines(@"Resources\Input.txt").Select(i => Regex.Match(i, REGISTER_PATTERN));
+            var registerList = instructions.Select(i => new Register() { Name = i.Groups["Register"].Value, Value = 0 }).DistinctBy(r => r.Name).ToList();
             var largestValueEver = 0;
 
-            while (instruction != null)
+            foreach (var instruction in instructions)
             {
-                var instructionElements = instruction.Split(' ');
+                var register = registerList.Find(r => r.Name == instruction.Groups["Register"].Value);
+                var conditionRegister = registerList.Find(r => r.Name == instruction.Groups["ConditionRegister"].Value);
 
-                var targetRegister = registersList.Find(r => r.Name == instructionElements[0]);
-                if (targetRegister == null)
+                if ((instruction.Groups["ConditionEvaluator"].Value == "==" && conditionRegister.Value == int.Parse(instruction.Groups["ConditionValue"].Value))
+                    || (instruction.Groups["ConditionEvaluator"].Value == "!=" && conditionRegister.Value != int.Parse(instruction.Groups["ConditionValue"].Value))
+                    || (instruction.Groups["ConditionEvaluator"].Value == "<" && conditionRegister.Value < int.Parse(instruction.Groups["ConditionValue"].Value))
+                    || (instruction.Groups["ConditionEvaluator"].Value == "<=" && conditionRegister.Value <= int.Parse(instruction.Groups["ConditionValue"].Value))
+                    || (instruction.Groups["ConditionEvaluator"].Value == ">" && conditionRegister.Value > int.Parse(instruction.Groups["ConditionValue"].Value))
+                    || (instruction.Groups["ConditionEvaluator"].Value == ">=" && conditionRegister.Value >= int.Parse(instruction.Groups["ConditionValue"].Value)))
                 {
-                    targetRegister = new Register
+                    if (instruction.Groups["Change"].Value == "inc")
                     {
-                        Name = instructionElements[0],
-                        Value = 0
-                    };
-
-                    registersList.Add(targetRegister);
-                }
-
-                var conditionRegister = registersList.Find(r => r.Name == instructionElements[4]);
-                if (conditionRegister == null)
-                {
-                    conditionRegister = new Register
-                    {
-                        Name = instructionElements[4],
-                        Value = 0
-                    };
-
-                    registersList.Add(conditionRegister);
-                }
-
-                if (instructionElements[5] == "==")
-                {
-                    if (conditionRegister.Value == int.Parse(instructionElements[6]))
-                    {
-                        ModifyRegister(targetRegister, instructionElements);
+                        register.Value += int.Parse(instruction.Groups["Value"].Value);
                     }
-                }
-                else if (instructionElements[5] == "!=")
-                {
-                    if (conditionRegister.Value != int.Parse(instructionElements[6]))
+                    else
                     {
-                        ModifyRegister(targetRegister, instructionElements);
-                    }
-                }
-                else if (instructionElements[5] == ">")
-                {
-                    if (conditionRegister.Value > int.Parse(instructionElements[6]))
-                    {
-                        ModifyRegister(targetRegister, instructionElements);
-                    }
-                }
-                else if (instructionElements[5] == "<")
-                {
-                    if (conditionRegister.Value < int.Parse(instructionElements[6]))
-                    {
-                        ModifyRegister(targetRegister, instructionElements);
-                    }
-                }
-                else if (instructionElements[5] == ">=")
-                {
-                    if (conditionRegister.Value >= int.Parse(instructionElements[6]))
-                    {
-                        ModifyRegister(targetRegister, instructionElements);
-                    }
-                }
-                else if (instructionElements[5] == "<=")
-                {
-                    if (conditionRegister.Value <= int.Parse(instructionElements[6]))
-                    {
-                        ModifyRegister(targetRegister, instructionElements);
+                        register.Value -= int.Parse(instruction.Groups["Value"].Value);
                     }
                 }
 
-                if (targetRegister.Value > largestValueEver)
+                if (register.Value > largestValueEver)
                 {
-                    largestValueEver = targetRegister.Value;
-                }
-
-                instruction = streamReader.ReadLine();
-            }
-
-            var largestValue = 0;
-            foreach (var register in registersList)
-            {
-                if (register.Value > largestValue)
-                {
-                    largestValue = register.Value;
+                    largestValueEver = register.Value;
                 }
             }
 
-            Console.WriteLine(largestValue);
+            Console.WriteLine(registerList.Max(r => r.Value));
             Console.WriteLine(largestValueEver);
             Console.ReadKey();
-
-            streamReader.Close();
-        }
-
-        static void ModifyRegister(Register targetRegister, string[] instructionElements)
-        {
-            if (instructionElements[1].Equals("inc"))
-            {
-                targetRegister.Value += int.Parse(instructionElements[2]);
-            }
-            else
-            {
-                targetRegister.Value -= int.Parse(instructionElements[2]);
-            }
         }
     }
 }
