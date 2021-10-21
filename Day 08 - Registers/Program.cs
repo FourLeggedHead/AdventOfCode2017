@@ -25,12 +25,15 @@ namespace Day08_Registers
                 var register = registerList.Find(r => r.Name == instruction.Groups["Register"].Value);
                 var conditionRegister = registerList.Find(r => r.Name == instruction.Groups["ConditionRegister"].Value);
 
-                if ((instruction.Groups["ConditionEvaluator"].Value == "==" && conditionRegister.Value == int.Parse(instruction.Groups["ConditionValue"].Value))
-                    || (instruction.Groups["ConditionEvaluator"].Value == "!=" && conditionRegister.Value != int.Parse(instruction.Groups["ConditionValue"].Value))
-                    || (instruction.Groups["ConditionEvaluator"].Value == "<" && conditionRegister.Value < int.Parse(instruction.Groups["ConditionValue"].Value))
-                    || (instruction.Groups["ConditionEvaluator"].Value == "<=" && conditionRegister.Value <= int.Parse(instruction.Groups["ConditionValue"].Value))
-                    || (instruction.Groups["ConditionEvaluator"].Value == ">" && conditionRegister.Value > int.Parse(instruction.Groups["ConditionValue"].Value))
-                    || (instruction.Groups["ConditionEvaluator"].Value == ">=" && conditionRegister.Value >= int.Parse(instruction.Groups["ConditionValue"].Value)))
+                var conditionEvaluator = instruction.Groups["ConditionEvaluator"].Value;
+                var conditionValue = int.Parse(instruction.Groups["ConditionValue"].Value);
+
+                if ((conditionEvaluator == "==" && conditionRegister.Value == conditionValue)
+                    || (conditionEvaluator == "!=" && conditionRegister.Value != conditionValue)
+                    || (conditionEvaluator == "<" && conditionRegister.Value < conditionValue)
+                    || (conditionEvaluator == "<=" && conditionRegister.Value <= conditionValue)
+                    || (conditionEvaluator == ">" && conditionRegister.Value > conditionValue)
+                    || (conditionEvaluator == ">=" && conditionRegister.Value >= conditionValue))
                 {
                     if (instruction.Groups["Change"].Value == "inc")
                     {
