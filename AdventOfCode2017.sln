@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 08 - Registers", "Day 0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 09 - StreamProcessing", "Day 09 - StreamProcessing\Day 09 - StreamProcessing.csproj", "{33409B89-AE6B-4F23-B6B4-E446E3920EC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 10 - KnotHash", "Day 10 - KnotHash\Day 10 - KnotHash.csproj", "{625C64BB-34AF-4BB2-BB61-965E9E5CDB1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{33409B89-AE6B-4F23-B6B4-E446E3920EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33409B89-AE6B-4F23-B6B4-E446E3920EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33409B89-AE6B-4F23-B6B4-E446E3920EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{625C64BB-34AF-4BB2-BB61-965E9E5CDB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625C64BB-34AF-4BB2-BB61-965E9E5CDB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625C64BB-34AF-4BB2-BB61-965E9E5CDB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625C64BB-34AF-4BB2-BB61-965E9E5CDB1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
