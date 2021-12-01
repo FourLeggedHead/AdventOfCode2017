@@ -2,119 +2,63 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Day12_DigitalPlumber
+namespace Day_12___DigitalPlumber
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var streamReader = new StreamReader(@"Resources\Input.txt");
-            var village = new List<ProgramCitizen>();
+            Console.WriteLine("Day 12: Digital Plumber");
 
-            while (!streamReader.EndOfStream)
+            // Part I
+            var regex = new Regex(@"(?<Id>\d+) <-> (?<ToIds>(\d+,? ?)+)");
+            var programPipesDictionary = File.ReadAllLines(@"Resources\Input.txt").Select(l => regex.Match(l))
+                                    .ToDictionary(k => int.Parse(k.Groups["Id"].Value),
+                                            v => v.Groups["ToIds"].Value.Replace(" ", String.Empty).Split(',').Select(int.Parse).ToList());
+
+            var connectedPrograms = new List<int>();
+            ListConnectedPrograms(0, programPipesDictionary, connectedPrograms);
+
+            Console.WriteLine(connectedPrograms.Count);
+
+            // Part II
+            var programGroupsDictionary = programPipesDictionary.ToDictionary(k => k.Key, v => -1);
+            var programsWithoutGroup = programGroupsDictionary.Where(p => p.Value == -1).Select(p => p.Key).OrderBy(p => p).ToArray();
+            while (programsWithoutGroup.Count() != 0)
             {
-                var programCard = streamReader.ReadLine();
-                var matches = Regex.Matches(programCard, "\\d+");
-
-                var citizenId = int.Parse(matches[0].Value);
-                var newProgramCitizen = village.Find(c => c.ID == citizenId);
-                if (newProgramCitizen == null)
-                {
-                    newProgramCitizen = new ProgramCitizen {ID = citizenId};
-                    village.Add(newProgramCitizen);
-                }
-
-                for (int i = 1; i < matches.Count; i++)
-                {
-                    var pipeId = int.Parse(matches[i].Value);
-                    if (pipeId == citizenId) continue;
-                    var connectedCitizen = village.Find(c => c.ID == pipeId);
-                    if (connectedCitizen == null)
-                    {
-                        connectedCitizen = new ProgramCitizen { ID = pipeId };
-                        village.Add(connectedCitizen);
-                    }
-
-                    if (!newProgramCitizen.PipesTo.Contains(connectedCitizen))
-                    {
-                        newProgramCitizen.PipesTo.Add(connectedCitizen);
-                    }
-
-                    if (!connectedCitizen.PipesTo.Contains(newProgramCitizen))
-                    {
-                        connectedCitizen.PipesTo.Add(newProgramCitizen);
-                    }
-                }
+                AssignGroup(programsWithoutGroup[0], programsWithoutGroup[0], programPipesDictionary, programGroupsDictionary);
+                programsWithoutGroup = programGroupsDictionary.Where(p => p.Value == -1).Select(p => p.Key).OrderBy(p => p).ToArray();
             }
 
-            village = village.OrderBy(c => c.ID).ToList();
-
-            List<ProgramCitizen> connectedProgram = new List<ProgramCitizen>();
-            village.Find(c => c.ID == 0).GetConnected(connectedProgram);
-
-            Console.WriteLine(connectedProgram.Count);
-
-            var groupsCount = 0;
-            var citizen = village.Find(c => c.GroupId == -1);
-            while (citizen != null)
-            {
-                var rootId = citizen.ID;
-                citizen.AssignGroup(rootId);
-                groupsCount++;
-
-                citizen = village.Find(c => c.GroupId == -1);
-            }
-
-            Console.WriteLine(groupsCount);
-            Console.ReadKey();
-
-            streamReader.Close();
-        }
-    }
-
-    class ProgramCitizen
-    {
-        public int ID { get; set; }
-        public List<ProgramCitizen> PipesTo { get; set; }
-        public int GroupId { get; set; }
-
-        public ProgramCitizen()
-        {
-            PipesTo = new List<ProgramCitizen>();
-            GroupId = -1;
+            Console.WriteLine(programGroupsDictionary.Select(p => p.Value).Distinct().Count());
         }
 
-        public void GetConnected(List<ProgramCitizen> connectedPrograms)
+        static void ListConnectedPrograms(int rootProgram, Dictionary<int, List<int>> programPipesDictionary, List<int> connectedPrograms)
         {
             if (connectedPrograms.Count == 0)
             {
-                connectedPrograms.Add(this);
+                connectedPrograms.Add(rootProgram);
             }
 
-            foreach (var pipe in PipesTo)
+            foreach (var pipe in programPipesDictionary[rootProgram])
             {
                 if (connectedPrograms.Contains(pipe)) continue;
                 connectedPrograms.Add(pipe);
-                pipe.GetConnected(connectedPrograms);
+                ListConnectedPrograms(pipe, programPipesDictionary, connectedPrograms);
             }
         }
 
-        public void AssignGroup(int rootId)
+        static void AssignGroup(int rootProgram, int groupId, Dictionary<int, List<int>> programPipesDictionary, Dictionary<int, int> programGroupsDictionary)
         {
-            if (GroupId == -1)
+            if (programGroupsDictionary[rootProgram] == -1)
             {
-                GroupId = rootId;
+                programGroupsDictionary[rootProgram] = groupId;
 
-                foreach (var pipe in PipesTo)
+                foreach (var pipe in programPipesDictionary[rootProgram])
                 {
-                    if (pipe != null)
-                    {
-                        pipe.AssignGroup(rootId);
-                    }
+                    AssignGroup(pipe, groupId, programPipesDictionary, programGroupsDictionary);
                 }
             }
         }
