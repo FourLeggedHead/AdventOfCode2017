@@ -16,6 +16,19 @@ namespace Day_13___Packet_Scanners
             // Part I
             var severity = layers.Select(l => l.Key % ((l.Value - 1) * 2) == 0 ? l.Key * l.Value : 0).Sum();
             Console.WriteLine(severity);
+
+            // Part II
+            var delay = 0;
+            var caughtCount = 0;
+
+            do
+            {
+                delay++;
+                caughtCount = layers.Select(l => (l.Key + delay) % ((l.Value - 1) * 2) == 0 ? 1 : 0).Sum();
+
+            } while (caughtCount != 0);
+
+            Console.WriteLine(delay);
         }
     }
 }
